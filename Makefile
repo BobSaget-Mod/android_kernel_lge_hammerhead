@@ -365,8 +365,13 @@ MODFLAGS        = -DMODULE \
                   -mfpu=neon-vfpv4 \
                   -mtune=cortex-a15 \
                   -O3 \
-                  -fgcse-las \
-                  -Wno-error=implicit-function-declaration
+                  -Wno-logical-not-parentheses \
+                  -Wno-implicit-function-declaration \
+                  -Wno-unused-function \
+                  -Wno-unused-variable \
+                  -Wno-sequence-point \
+                  -Wno-incompatible-pointer-types \
+                  -Wno-bool-compare
 
 CFLAGS_MODULE   = $(MODFLAGS)
 AFLAGS_MODULE   = $(MODFLAGS)
@@ -375,9 +380,13 @@ CFLAGS_KERNEL   = -march=armv7-a \
                   -mfpu=neon-vfpv4 \
                   -mtune=cortex-a15 \
                   -O2 \
-                  -fgcse-las \
-                  -fpredictive-commoning \
-		  -Wno-error=implicit-function-declaration
+                  -Wno-logical-not-parentheses \
+                  -Wno-implicit-function-declaration \
+                  -Wno-unused-function \
+                  -Wno-unused-variable \
+                  -Wno-sequence-point \
+                  -Wno-incompatible-pointer-types \
+                  -Wno-bool-compare
 ifeq ($(ENABLE_GRAPHITE),true)
 CFLAGS_KERNEL	+= $(GRAPHITE_FLAGS) 
 CFLAGS_MODULE	+= $(GRAPHITE_FLAGS)
