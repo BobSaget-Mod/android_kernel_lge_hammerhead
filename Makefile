@@ -247,10 +247,8 @@ HOSTCC       = gcc
 HOSTCXX      = g++
 HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -fgcse-las
 HOSTCXXFLAGS = -O3 -fgcse-las
-ifeq ($(ENABLE_GRAPHITE),true)
 HOSTCXXFLAGS += -fgraphite -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
 HOSTCFLAGS += -fgraphite -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
-endif
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -336,10 +334,8 @@ AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
 CC		= $(CROSS_COMPILE)gcc
 CPP		= $(CC) -E
-ifeq ($(ENABLE_GRAPHITE),true)
 	CC += -fgraphite -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
 	CPP += -fgraphite -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
-endif
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
 STRIP		= $(CROSS_COMPILE)strip
@@ -374,10 +370,8 @@ CFLAGS_KERNEL   = -march=armv7-a \
                   -fgcse-las \
                   -fpredictive-commoning \
 		  -Wno-error=implicit-function-declaration
-ifeq ($(ENABLE_GRAPHITE),true)
 CFLAGS_KERNEL	+= $(GRAPHITE_FLAGS) 
 CFLAGS_MODULE	+= $(GRAPHITE_FLAGS)
-endif
 
 
 AFLAGS_KERNEL	=
@@ -591,9 +585,7 @@ ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
 KBUILD_CFLAGS	+= -O3
-ifeq ($(ENABLE_GRAPHITE),true)
 KBUILD_CFLAGS	+= -fgraphite -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block
-endif
 endif
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
