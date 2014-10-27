@@ -58,9 +58,9 @@ void *return_address(unsigned int level)
 
 #else /* if defined(CONFIG_FRAME_POINTER) && !defined(CONFIG_ARM_UNWIND) */
 
-/* Include arch/asm/unwind */
 #if defined(CONFIG_ARM_UNWIND)
-#include <asm/unwind.h>
+/* Include unwind tables from arm-eabi toolchain and kernel source */
+#include <unwind.h>
 #endif
 
 void *return_address(unsigned int level)
